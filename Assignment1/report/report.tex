@@ -1,0 +1,38 @@
+\documentclass[a4paper]{article}
+
+\usepackage{color}    % \textcolor
+\usepackage{hyperref} % \url
+
+\newcommand\todo[1]{{\Huge \textcolor{red}{TODO: #1}}}
+
+\title{Interactive Data Exploration\\
+	Assignment 1 report}
+\author{
+    \begin{tabular}{r l}
+        Erik Hajnal & \texttt{[bgh618]} \\
+        Rasmus Friis & \texttt{[\todo{your KU ID}]}
+    \end{tabular}
+}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\section*{Task 1 - Web server}
+
+We chose AwardSpace as our free web server provider. The main site is accessible at \url{http://bgh618.getenjoyment.net/}, which contains a single link to the first assignment. Later assignments will also be available from here.
+
+AwardSpace allows us to upload files to them both via their website, as well as FTP. The maximum allowed file size is 15 MB, which could \textit{potentially} lead to difficulties if we'll need to upload larger data sets to the web server throughout the course. The total disk space available is 1 GB. There is also a limit on the traffic to the website, set to 5 GB.
+
+\section*{Task 2 - Images}
+
+We implemented this task in two different ways: first by showing a JavaScript-oriented approach where we manually position the image at the correct location, and second, where we replace the manual calculations by a more CSS-oriented solution.
+
+\textit{Minor comment: although the standard practice is to link to the script files at the very end of the body (to allow the website to be displayed without having to wait for the scripts to load), we put them in the header as the assignment text said that there should be nothing in the body that might indicate that a picture will be loaded.}
+
+The picture displayed in the upper right corner is created as an \texttt{img} tag after the document has finished loading. Its position (via the \texttt{right} and \texttt{top} CSS properties) was set immediately after creation, as well as its positioning set to \texttt{fixed}. As applying these rules have a one-time effect, we registered two event handlers for scrolling and resizing the window to ensure that the picture always stays in the top right corner. We used the \texttt{jQuery} to implement this.
+
+For the bottom right picture, we created a CSS rule on the class \texttt{task2}, which set the picture as the background image for the body, disabled its repeating and set its position to the bottom right corner, as well as setting its attachment so that it scrolls with the body. When the document was loaded, we used jQuery to set the class on the body.
+
+\end{document}

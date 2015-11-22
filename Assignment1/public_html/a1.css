@@ -1,0 +1,12 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+.task2 {
+    background-image: url("https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1275550233%2FAMDG_maru2_bigger.jpg&f=1");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-attachment: fixed;
+}
