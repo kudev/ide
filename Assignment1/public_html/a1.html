@@ -1,62 +1,158 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Assignment 1</title>
+        <title>Assignment 1 report</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="a1_report.css" />
         <link rel="stylesheet" href="a1.css" />
         <script src="libs/jquery.min.js"></script>
         <script src="a1.js"></script>
     </head>
     <body>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
+        <p class="title center">
+            Interactive Data Exploration<br />
+            Assignment 1 report
+        </p>
+        <p class="center">
+            Erik Hajnal [bgh618]<br /> Rasmus Friis [gjv249]
+        </p>
 
-        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
+        <p class="section">Task 1 - Web server</p>
+        <p>
+            We chose AwardSpace as our free web server provider. The main site is accessible
+            at <a href="http://bgh618.getenjoyment.net/">http://bgh618.getenjoyment.net/</a>,
+            which contains a single link to the first assignment. Later assignments will also be available from here.
+        </p>
+        <p>
+            AwardSpace allows us to upload files to them both via their website, as well as FTP.
+            The maximum allowed file size is 15 MB, which could <i>potentially</i> lead to difficulties
+            if we'll need to upload larger data sets to the web server throughout the course.
+            The total disk space available is 1 GB. There is also a limit on the traffic to the website, set to 5 GB.
+        </p>
 
-        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
+        <p class="section">Task 2 - Images</p>
+        <p>
+            <a href="a1.html">Task 2 solution</a>
+        </p>
+        <p>
+            We implemented this task in two different ways: first by showing a JavaScript-oriented approach
+            where we manually position the image at the correct location, and second, where we replace the manual
+            calculations by a more CSS-oriented solution.
+        </p>
+        <p class="italic">
+            Minor comment: although the standard practice is to link to the script files at the very end
+            of the body (to allow the website to be displayed without having to wait for the scripts to load),
+            we put them in the header as the assignment text said that there should be nothing in the body that
+            might indicate that a picture will be loaded.
+        </p>
+        <p>
+            The picture displayed in the upper right corner is created as an <i>img</i> tag after the document
+            has finished loading. Its position (via the <i>right</i> and <i>top</i> CSS properties) was set
+            immediately after creation, as well as its positioning set to <i>fixed</i>.
+            As applying these rules have a one-time effect, we registered two event handlers for scrolling and
+            resizing the window to ensure that the picture always stays in the top right corner. We used
+            jQuery to implement this.
+        </p>
+        <p>
+            For the bottom right picture, we created a CSS rule on the class <i>task2</i>, which set the picture
+            as the background image for the body, disabled its repeating and set its position to the bottom
+            right corner, as well as setting its attachment so that it scrolls with the body. When the document
+            was loaded, we used jQuery to set the class on the body.
+        </p>
+        <p class="section">Task 3 - Visualisations</p>
+        <p class="subsection"><a href="http://scaleofuniverse.com/">Scale of the Universe</a></p>
+        <p>
+            <b>Positives:</b>
+            This page is extremely good at introducing the viewer to the substance of the data -- sizes.
+            As everything is visualized in relation to other things and a steady scaling of size, the viewer
+            easily grasps the content of the data.
+        </p>
+        <p>
+            The data set is very compact, and even includes text entries about the different objects
+            when clicked upon. Very intuitive, and speaks in a language that is easy for most to understand.
+        </p>
 
-        <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. </p>
+        <p>
+            <b>Negatives:</b>
+            has some rather unscientific text entries throughout the descriptions,
+            and most of the entries are drawn by hand, giving them some inconsistency,
+            i.e. the somewhat 'cartoonish' style might not convince all readers.
+        </p>
 
-        <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. </p>
+        <p class="subsection"><a href="http://visual.ly/sea-steel">Sea of Steel</a></p>
+        <p>
+            <b>Positives:</b>
+            The Sea of Steel Interactive visualization shows a heatmap of gun confiscations
+            in Washington D.C. and the surrounding areas in the USA.
+            A heatmap is a great way of presenting concentrations of data, and one of the
+            most interesting statistics in this data set is where the concentrated parts of the gun confiscating occurs.
+            It is possible to click any part, to see the breakdown of guns confiscated in that area,
+            which shows the detail of the data set.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            The data isn't presented in a particularly compact fashion, and a lot of the key information
+            is written below the visualization, making it somewhat difficult to get a clear overview without
+            hunting for the various pieces of the data.
+        </p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
-
-        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
-
-        <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. </p>
-
-        <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. </p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
-
-        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
-
-        <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. </p>
-
-        <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. </p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
-
-        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
-
-        <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. </p>
-
-        <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. </p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
-
-        <p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
-
-        <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. </p>
-
-        <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. </p>
-
-        <p>Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. </p>
-
+        <p class="subsection"><a href="http://visual.ly/what-jobs-report-really-means">Jobs report</a></p>
+        <p>
+            <b>Positives:</b>
+            The jobs report visualisation deals with various aspects of the job market in the US,
+            as well as other graphs that have to do with the effects of recession. It shows the
+            depressions in the economy very well, and gives numbers in a quite good level of detail.
+            It also includes a walkthrough of the data which might help people understand what the
+            graphs are trying to show.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            The visualisation isn't very free-to-explore (because of the walkthrough), and is mainly a
+            narrative which shows the interesting parts, without letting the viewer conclude for themselves.
+        </p>
+        <p class="subsection"><a href="https://www.openstreetmap.org">Open Street Maps</a></p>
+        <p>
+            Not so much a visualisation of specific data, but a visualisation of data nonetheless.
+        </p>
+        <p>
+            <b>Positives:</b>
+            Various levels of information: you can look for directions in a specific village,
+            but you can also refresh your geography knowledge by zooming out and looking at the global/continental
+            level. A lot of the data comes from individuals that help build the database, which keeps it somewhat
+            up to date.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            Builds heavily on conventions, but doesn't describe them: figuring out what the different types
+            of colours or icons mean is difficult. The community-based approach can also lead to malicious manipulation.
+            Unclear language (layers, query features, GPS traces) with no immediate explanation.
+        </p>
+        
+        <p class="section">Task 4 - Individual parts</p>
+        <p class="subsection">Erik</p>
+        <p>
+            I would like to see criminal rates along with the types of crimes commited on the map. The countries would
+            be coloured to indicate the crime rates and small pie charts would appear to show the relative frequencies
+            between the types of crimes committed. It would also be possible to switch the main colouring of the countries
+            to be based on a specific type of crime. The idea would be to identify the 'safe' and 'dangerous' countries/areas
+            on the planet. Although charts with crime rates exist, crime rates for the individual crime types are more
+            difficult to come by and I could not find any statistics that would combine the different types.
+        </p>
+        <p>
+            I could not find a complete dataset for the entire world, but I did find some country specific statistics. This
+            means that the data would have to be gathered individually for every country and most likely normalised. Chances
+            are also high that many countries will not have this data available, or not in good enough detail.
+        </p>
+        <p>
+            Here is an example visualisation that illustrates what I have in mind:
+        </p>
+        <p>
+            <img src='http://support2.dundas.com/Articles/1093/PieChartOnMap.png' alt='Pie charts on a map'>
+        </p>
+        <p>
+            My version, however, could be navigated. Furthermore, when zooming out, certain countries could be grouped
+            together, in which case the pie charts would also reflect the aggregated results for the given area.
+        </p>
+        <p class="subsection">Rasmus</p>
     </body>
 </html>
