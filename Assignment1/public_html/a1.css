@@ -5,8 +5,9 @@ body {
     min-height: 100%;
 }
 .task2 {
-    background-image: url("https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1275550233%2FAMDG_maru2_bigger.jpg&f=1");
+    background-image: url("http://kep.index.hu/1/0/1040/10401/104017/10401753_3dd66c976c58410699098f1d1fb98c26_wm.jpg");
     background-repeat: no-repeat;
     background-position: bottom right;
     background-attachment: fixed;
+    background-size: 30%;
 }

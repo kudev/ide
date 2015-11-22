@@ -11,8 +11,9 @@ $(function () {
     $('body').addClass('task2');
 
     // Top right image
-    $('body').append('<img src="https://www.redditstatic.com/secret-santa-present.png" />');
+    $('body').append('<img src="http://www.oriooli.com/wp-content/uploads/2013/08/random-pic-01.jpg" />');
     $('img').css('position', 'fixed');
+    $('img').css('width', '30%');
     updateTopRightImage();
 });
 

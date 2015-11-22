@@ -1,0 +1,39 @@
+html {
+    width: 100%;
+}
+
+body {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+.title {
+    font-size: xx-large;
+}
+
+.section {
+    font-size: x-large;
+    font-weight: bolder;
+    padding: 5px 10px;
+}
+
+.subsection {
+    font-size: large;
+    font-weight: bold;
+    padding: 2px 5px;
+}
+
+.center {
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.todo {
+    color: red;
+    font-size: 40px;
+}

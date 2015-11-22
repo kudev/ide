@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment 1 report</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="a1_report.css" />
+    </head>
+    <body>
+        <p class="title center">
+            Interactive Data Exploration<br />
+            Assignment 1 report
+        </p>
+        <p class="center">
+            Erik Hajnal [bgh618]<br /> Rasmus Friis [gjv249]
+        </p>
+
+        <p>
+            <a href="a1.html">Assignment 1 solution</a>
+        </p>
+        <p class="section">Task 1 - Web server</p>
+        <p>
+            We chose AwardSpace as our free web server provider. The main site is accessible
+            at <a href="http://bgh618.getenjoyment.net/">http://bgh618.getenjoyment.net/</a>,
+            which contains a single link to the first assignment. Later assignments will also be available from here.
+        </p>
+        <p>
+            AwardSpace allows us to upload files to them both via their website, as well as FTP.
+            The maximum allowed file size is 15 MB, which could <i>potentially</i> lead to difficulties
+            if we'll need to upload larger data sets to the web server throughout the course.
+            The total disk space available is 1 GB. There is also a limit on the traffic to the website, set to 5 GB.
+        </p>
+
+        <p class="section">Task 2 - Images</p>
+        <p>
+            We implemented this task in two different ways: first by showing a JavaScript-oriented approach
+            where we manually position the image at the correct location, and second, where we replace the manual
+            calculations by a more CSS-oriented solution.
+        </p>
+        <p class="italic">
+            Minor comment: although the standard practice is to link to the script files at the very end
+            of the body (to allow the website to be displayed without having to wait for the scripts to load),
+            we put them in the header as the assignment text said that there should be nothing in the body that
+            might indicate that a picture will be loaded.
+        </p>
+        <p>
+            The picture displayed in the upper right corner is created as an <i>img</i> tag after the document
+            has finished loading. Its position (via the <i>right</i> and <i>top</i> CSS properties) was set
+            immediately after creation, as well as its positioning set to <i>fixed</i>.
+            As applying these rules have a one-time effect, we registered two event handlers for scrolling and
+            resizing the window to ensure that the picture always stays in the top right corner. We used
+            jQuery to implement this.
+        </p>
+        <p>
+            For the bottom right picture, we created a CSS rule on the class <i>task2</i>, which set the picture
+            as the background image for the body, disabled its repeating and set its position to the bottom
+            right corner, as well as setting its attachment so that it scrolls with the body. When the document
+            was loaded, we used jQuery to set the class on the body.
+        </p>
+        <p class="todo">interesting pictures</p>
+
+        <p class="section">Task 3 - Visualisations</p>
+        <p class="subsection"><a href="http://scaleofuniverse.com/">Scale of the Universe</a></p>
+        <p>
+            <b>Positives:</b>
+            This page is extremely good at introducing the viewer to the substance of the data -- sizes.
+            As everything is visualized in relation to other things and a steady scaling of size, the viewer
+            easily grasps the content of the data.
+        </p>
+        <p>
+            The data set is very compact, and even includes text entries about the different objects
+            when clicked upon. Very intuitive, and speaks in a language that is easy for most to understand.
+        </p>
+
+        <p>
+            <b>Negatives:</b>
+            has some rather unscientific text entries throughout the descriptions,
+            and most of the entries are drawn by hand, giving them some inconsistency,
+            i.e. the somewhat 'cartoonish' style might not convince all readers.
+        </p>
+
+        <p class="subsection"><a href="http://visual.ly/sea-steel">Sea of Steel</a></p>
+        <p>
+            <b>Positives:</b>
+            The Sea of Steel Interactive visualization shows a heatmap of gun confiscations
+            in Washington D.C. and the surrounding areas in the USA.
+            A heatmap is a great way of presenting concentrations of data, and one of the
+            most interesting statistics in this data set is where the concentrated parts of the gun confiscating occurs.
+            It is possible to click any part, to see the breakdown of guns confiscated in that area,
+            which shows the detail of the data set.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            The data isn't presented in a particularly compact fashion, and a lot of the key information
+            is written below the visualization, making it somewhat difficult to get a clear overview without
+            hunting for the various pieces of the data.
+        </p>
+
+        <p class="subsection"><a href="http://visual.ly/what-jobs-report-really-means">Jobs report</a></p>
+        <p>
+            <b>Positives:</b>
+            The jobs report visualisation deals with various aspects of the job market in the US,
+            as well as other graphs that have to do with the effects of recession. It shows the
+            depressions in the economy very well, and gives numbers in a quite good level of detail.
+            It also includes a walkthrough of the data which might help people understand what the
+            graphs are trying to show.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            The visualisation isn't very free-to-explore (because of the walkthrough), and is mainly a
+            narrative which shows the interesting parts, without letting the viewer conclude for themselves.
+        </p>
+        <p class="subsection"><a href="https://www.openstreetmap.org">Open Street Maps</a></p>
+        <p>
+            Not so much a visualisation of specific data, but a visualisation of data nonetheless.
+        </p>
+        <p>
+            <b>Positives:</b>
+            Various levels of information: you can look for directions in a specific village,
+            but you can also refresh your geography knowledge by zooming out and looking at the global/continental
+            level. A lot of the data comes from individuals that help build the database, which keeps it somewhat
+            up to date.
+        </p>
+        <p>
+            <b>Negatives:</b>
+            Builds heavily on conventions, but doesn't describe them: figuring out what the different types
+            of colours or icons mean is difficult. The community-based approach can also lead to malicious manipulation.
+            Unclear language (layers, query features, GPS traces) with no immediate explanation.
+        </p>
+    </body>
+</html>
