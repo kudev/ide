@@ -83,7 +83,9 @@ function initChart2() {
                 tooltip.transition()
                         .duration(200)
                         .style("opacity", .9);
-                tooltip.html('Copenhagen:' + getCph(d) + '<br />' + 'Egedesminde: ' + getGreenland(d))
+                tooltip.html('Year: ' + d.cph.YEAR + '<br />\
+                             Copenhagen:' + getCph(d) + '<br />\
+                             Egedesminde: ' + getGreenland(d))
                         .style("left", (d3.event.pageX + 5) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
             })
