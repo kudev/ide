@@ -2,6 +2,15 @@
 
 d3.select(window).on('load', init);
 
+function getX(d) {
+    return d.YEAR;
+}
+
+function getY(d) {
+    var value = d.metANN;
+    return value === 999.9 ? undefined : value;
+}
+
 function init(){
     var margin = 50;
 
@@ -11,12 +20,13 @@ function init(){
     
     var xScale = d3.scale.linear().range([margin, width - margin])
             .domain([
-        d3.min(data, function (d) { return d.YEAR; }),
-        d3.max(data, function (d) { return d.YEAR; })]);
+        d3.min(data, getX),
+        d3.max(data, getX)]);
+
     var yScale = d3.scale.linear().range([height - margin, margin])
             .domain([
-        d3.min(data, function (d) { return d.metANN; }),
-        d3.max(data, function (d) { return d.metANN; })]);
+        d3.min(data, getY),
+        d3.max(data, getY)]);
     var xAxis = d3.svg.axis()
             .scale(xScale);
     var yAxis = d3.svg.axis()
@@ -33,16 +43,16 @@ function init(){
 
     var drawLine = d3.svg.line()
         .x(function(d) {
-          return xScale(d.YEAR);
+            return xScale(getX(d));
         })
         .y(function(d) {
-          return yScale(d.metANN);
+            return yScale(getY(d));
         })
-        .interpolate('linear');
+        .interpolate('basis');
 
-        chart.append('svg:path')
-            .attr('d', drawLine(data))
-            .attr('stroke', 'blue')
-            .attr('stroke-width', 2)
-            .attr('fill', 'none');
+    chart.append('svg:path')
+        .attr('d', drawLine(data))
+        .attr('stroke', 'blue')
+        .attr('stroke-width', 2)
+        .attr('fill', 'none');
 }
