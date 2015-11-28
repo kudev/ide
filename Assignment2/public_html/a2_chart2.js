@@ -1,10 +1,16 @@
-function getX(d) {
-    return d.YEAR;
-}
-
-function getY(d) {
+function getValue(d) {
     var value = d.metANN;
     return value === 999.9 ? undefined : value;
+}
+
+function getCph(d) {
+    var value = d.cph.metANN;
+    return value === 999.9 ? -5000 : value;
+}
+
+function getGreenland(d) {
+    var value = d.greenland.metANN;
+    return value === 999.9 ? -5000 : value;
 }
 
 function initChart2() {
@@ -17,13 +23,13 @@ function initChart2() {
 
     var xScale = d3.scale.linear().range([margin, width - smallMargin])
             .domain([
-                d3.min(data, getX),
-                d3.max(data, getX)]);
+                d3.min(data1, getValue) - 1,
+                d3.max(data1, getValue) + 1]);
 
     var yScale = d3.scale.linear().range([height - margin, smallMargin])
             .domain([
-                d3.min(data, getY),
-                d3.max(data, getY)]);
+                d3.min(data2, getValue) - 1,
+                d3.max(data2, getValue) + 1]);
     var xAxis = d3.svg.axis()
             .outerTickSize(-height + margin + smallMargin)
             .scale(xScale);
@@ -52,15 +58,22 @@ function initChart2() {
             .style('text-anchor', 'end')
             .text('Temperature (°C)');
 
+    var dataMerged = [];
+    for (var i = 0; i < data1.length; ++i) {
+        dataMerged[i] = {
+            cph: data1[i],
+            greenland: data2[i]
+        };
+    }
     chart.selectAll(".dot")
-            .data(data)
+            .data(dataMerged)
             .enter().append("circle")
             .attr("class", "dot")
             .attr("r", 3.5)
             .attr("cx", function (d) {
-                return xScale(getX(d));
+                return xScale(getCph(d));
             })
             .attr("cy", function (d) {
-                return yScale(getY(d));
+                return yScale(getGreenland(d));
             });
 }
