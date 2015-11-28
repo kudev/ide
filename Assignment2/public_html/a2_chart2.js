@@ -17,6 +17,7 @@ function initChart2() {
     var smallMargin = 20;
     var margin = 80;
 
+    var tooltip = d3.select('.tooltip');
     var chart = d3.select('#chart2');
     var width = parseInt(chart.style('width'));
     var height = parseInt(chart.attr('height'));
@@ -32,9 +33,11 @@ function initChart2() {
                 d3.max(data2, getValue) + 1]);
     var xAxis = d3.svg.axis()
             .outerTickSize(-height + margin + smallMargin)
+            .innerTickSize(-height + margin + smallMargin)
             .scale(xScale);
     var yAxis = d3.svg.axis()
-            .innerTickSize(-width + margin + smallMargin).outerTickSize(-width + margin + smallMargin)
+            .innerTickSize(-width + margin + smallMargin)
+            .outerTickSize(-width + margin + smallMargin)
             .scale(yScale)
             .orient('left');
 
@@ -43,9 +46,9 @@ function initChart2() {
             .attr('transform', 'translate(0, ' + (height - margin) + ')')
             .call(xAxis)
             .append('text')
-            .attr('x', width / 2)
+            .attr('x', width / 2 - margin)
             .attr('y', margin - smallMargin)
-            .text('Year');
+            .text('Temperature in Copenhagen (°C)');
 
     chart.append('svg:g')
             .attr('class', 'axis')
@@ -53,10 +56,10 @@ function initChart2() {
             .call(yAxis)
             .append('text')
             .attr('transform', 'rotate(-90)')
-            .attr('x', -height / 2 + margin)
+            .attr('x', -height / 2 + 2 * margin)
             .attr('y', -margin / 2)
             .style('text-anchor', 'end')
-            .text('Temperature (°C)');
+            .text('Temperature in Egedesminde (°C)');
 
     var dataMerged = [];
     for (var i = 0; i < data1.length; ++i) {
@@ -69,11 +72,24 @@ function initChart2() {
             .data(dataMerged)
             .enter().append("circle")
             .attr("class", "dot")
-            .attr("r", 3.5)
+            .attr("r", 4.5)
             .attr("cx", function (d) {
                 return xScale(getCph(d));
             })
             .attr("cy", function (d) {
                 return yScale(getGreenland(d));
+            })
+            .on("mouseover", function (d) {
+                tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                tooltip.html('Copenhagen:' + getCph(d) + '<br />' + 'Egedesminde: ' + getGreenland(d))
+                        .style("left", (d3.event.pageX + 5) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
             });
 }
