@@ -11,51 +11,7 @@
 
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script type="text/javascript" src="station_bp.js"></script>
-        <script type="text/javascript">
-            d3.select(window).on('load', init);
-
-            function init(){
-                var margin = 50;
-
-                var chart = d3.select('#chart');
-                var xScale = d3.scale.linear().range([margin, 980])
-                        .domain([
-                    d3.min(data, function (d) { return d.YEAR; }),
-                    d3.max(data, function (d) { return d.YEAR; })]);
-                var yScale = d3.scale.linear().range([margin, 450])
-                        .domain([
-                    d3.min(data, function (d) { return d.metANN; }),
-                    d3.max(data, function (d) { return d.metANN; })]);
-                var xAxis = d3.svg.axis()
-                        .scale(xScale);
-                var yAxis = d3.svg.axis()
-                        .scale(yScale)
-                        .orient('left');
-
-                chart.append('svg:g')
-                        .attr('transform', 'translate(0, 450)')
-                        .call(xAxis);
-                
-                chart.append('svg:g')
-                        .attr('transform', 'translate(' + margin + ', 0)')
-                        .call(yAxis);
-                
-                var drawLine = d3.svg.line()
-                    .x(function(d) {
-                      return xScale(d.YEAR);
-                    })
-                    .y(function(d) {
-                      return yScale(d.metANN);
-                    })
-                    .interpolate('linear');
-            
-                    chart.append('svg:path')
-                        .attr('d', drawLine(data))
-                        .attr('stroke', 'blue')
-                        .attr('stroke-width', 2)
-                        .attr('fill', 'none');
-            }
-        </script>
+        <script type="text/javascript" src="a2.js"></script>
     </head>
     <body>
         <svg id="chart" width="1000" height="500"></svg>
