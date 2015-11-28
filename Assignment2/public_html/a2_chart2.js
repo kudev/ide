@@ -1,3 +1,5 @@
+// Scatterplot implementation based on http://bl.ocks.org/weiglemc/6185069
+
 function getValue(d) {
     var value = d.metANN;
     return value === 999.9 ? undefined : value;
