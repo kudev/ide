@@ -125,3 +125,7 @@ sympy-plots-for-*.tex/
 *.bak
 *.sav
 /Assignment1/nbproject
+/Assignment2/nbproject/private/
+/Assignment2/nbproject/project.properties
+/Assignment2/nbproject/project.xml
+/Assignment3/nbproject/

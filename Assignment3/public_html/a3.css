@@ -1,0 +1,72 @@
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.axis .tick line {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.dot {
+    fill: #c49515;
+}
+
+.pcadot:hover {
+    fill: #ff0000;
+}
+
+.tooltip {
+    position: absolute;
+    pointer-events: none;
+    background-color: white;
+    border: 1px solid #aeabab;
+}
+
+svg {
+    float: left;
+}
+
+/* Copied from assignment 1 */
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+.title {
+    font-size: xx-large;
+}
+
+.section {
+    font-size: x-large;
+    font-weight: bolder;
+    padding: 5px 10px;
+}
+
+.subsection {
+    font-size: large;
+    font-weight: bold;
+    padding: 2px 5px;
+}
+
+.center {
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.todo {
+    color: red;
+    font-size: 40px;
+}
