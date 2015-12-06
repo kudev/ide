@@ -27,14 +27,20 @@
     border: 1px solid #aeabab;
 }
 
-svg {
-    float: left;
-}
-
-.outlier {
+.link {
     text-decoration: underline dotted;
 }
 
+svg {
+    display: block;
+    margin-left: auto;
+}
+
+.float {
+    width: 50%;
+    display: block;
+    float:left;
+}
 /* Copied from assignment 1 */
 
 html {

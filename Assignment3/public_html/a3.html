@@ -20,10 +20,43 @@
             Erik Hajnal [bgh618]<br /> Rasmus Friis [gjv249]
         </p>
 
-        <p class="section">Chart</p>
-        <svg id="chart1" width="50%" height="500"></svg>
-        <svg id="chart2" width="50%" height="500"></svg>
-        
-        <p>asdfasfsadf <a class="outlier">outlier</a></p>
+        <p>
+            The following panel contains visualizations of a dataset of 40 hands, with the left panel showing a two 
+            dimensional representation of a handprint, and the right panel is a scatterplot for the PCA analysis of the dataset.
+            Hovering over the dots in the right diagram will reveal details. Clicking on them will show the associated
+            handprint.</p>
+        <div class="float">
+            <svg id="chart2" width="100%" height="400"></svg>
+            <svg id="chart1" width="75%" height="300"></svg>
+        </div>
+        <p class="section">Results</p>
+        <p>
+            The scatterplot points axes represent the two most dominant (causing the most amount of variance in hands)
+            features and the points' position shows how affected the given hand is by that feature (to put it in <i>very</i>
+            plain terms). PCA points around the <a class="link" id="link-4">origin</a> (0, 0) represent hands that are very
+            close to the 'average' hand.
+        </p>
+        <p>
+            Based on the results, it appears that the X-axis indicates the thickness of the fingers and the hand in general,
+            i.e. the <a class="link" id="link-30">leftmost hands</a> are generally very slim, whereas the 
+            <a class="link" id="link-35">rightmost points</a> have thicker fingers. The Y-axis seems to affect the spread
+            of the fingers between the middle and the little finger. <a class="link" id="link-39">Low values</a> on this axis
+            indicate that these fingers are very close together, whereas hands with a
+            <a class="link" id="link-37">higher value</a> have these three fingers more spread out.
+        </p>
+        <p>
+            Visualising principal components on a scatter plot allows correlations to be found easily. It seems that - compared
+            to the average - people with thinner fingers tend to prefer keeping them somewhat closer together. Although there is
+            not enough data to be able to clearly conlude it, it seems that people with thicker fingers also have a tendency to
+            keep them together, although much more so than people with thin fingers. On the other hand, the deviation in the
+            case of thick fingers is much higher.
+        </p>
+        <p class="section">Conclusion</p>
+        <p>
+            There is a great variance in hands, even though the dataset is very small. Having a large amount of features makes
+            analysis much more difficult, as it might not even be obvious which features should be investigated. PCA is a
+            method to determine the most <i>important</i> (causing the most variance) features, and thus, being able to
+            navigate the first few principal components can help to find some quick correlations.
+        </p>
     </body>
 </html>

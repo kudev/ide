@@ -6,14 +6,15 @@ d3.select(window).on('load', init);
 var hands, hands_pca, hands_avg;
 
 function init() {
-
-    $('.outlier').on('mouseover', function () {
-        $('#dot-37').addClass('highlighted');
-        $('#dot-37').attr('r', '20px');
+    $('.link').on('mouseover', function (e) {
+        var id = e.target.id.substring(5);
+        $('#dot-' + id).addClass('highlighted');
+        $('#dot-' + id).attr('r', '20px');
     });
-    $('.outlier').on('mouseout', function () {
-        $('#dot-37').removeClass('highlighted');
-        $('#dot-37').attr('r', '4.5px');
+    $('.link').on('mouseout', function (e) {
+        var id = e.target.id.substring(5);
+        $('#dot-' + id).removeClass('highlighted');
+        $('#dot-' + id).attr('r', '4.5px');
     });
 
     initData();
@@ -65,7 +66,7 @@ function getPCA2(d) {
 
 function drawHandChart(handIndex) {
     var smallMargin = 20;
-    var margin = 80;
+    var margin = 40;
 
     var chart = d3.select('#chart1');
     chart.selectAll('*').remove();
@@ -164,8 +165,8 @@ function drawPcaChart() {
             .attr('transform', 'translate(0, ' + (height - margin) + ')')
             .call(xAxis)
             .append('text')
-            .attr('x', width / 2 - margin)
-            .attr('y', margin - smallMargin)
+            .attr('x', width / 2 - 30)
+            .attr('y', 30)
             .text('First PCA component');
 
     chart.append('svg:g')
@@ -174,8 +175,8 @@ function drawPcaChart() {
             .call(yAxis)
             .append('text')
             .attr('transform', 'rotate(-90)')
-            .attr('x', -height / 2 + 2 * margin)
-            .attr('y', -margin / 2)
+            .attr('x', -height / 2 + 120)
+            .attr('y', -35)
             .style('text-anchor', 'end')
             .text('Second PCA component');
 
