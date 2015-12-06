@@ -6,6 +6,22 @@ d3.select(window).on('load', init);
 var hands, hands_pca, hands_avg;
 
 function init() {
+
+    $('.outlier').on('mouseover', function () {
+        $('#dot-37').addClass('highlighted');
+        $('#dot-37').attr('r', '20px');
+    });
+    $('.outlier').on('mouseout', function () {
+        $('#dot-37').removeClass('highlighted');
+        $('#dot-37').attr('r', '4.5px');
+    });
+
+    initData();
+    drawHandChart(0);
+    drawPcaChart();
+}
+
+function initData() {
     hands = [];
 
     hands_avg = [];
@@ -29,9 +45,6 @@ function init() {
         hands_avg[i].x /= 40;
         hands_avg[i].y /= hands.length;
     }
-
-    drawHandChart(0);
-    drawPcaChart();
 }
 
 function getX(d) {
@@ -170,6 +183,9 @@ function drawPcaChart() {
             .data(hands_pca)
             .enter().append("circle")
             .attr("class", "dot pcadot")
+            .attr("id", function (d, index) {
+                return "dot-" + index;
+            })
             .attr("r", 4.5)
             .attr("cx", function (d) {
                 return xScale(getPCA1(d));
@@ -194,5 +210,6 @@ function drawPcaChart() {
             })
             .on("click", function (d, index) {
                 drawHandChart(index);
-            });;
+            });
+    ;
 }

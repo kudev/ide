@@ -12,6 +12,10 @@
     fill: #c49515;
 }
 
+.highlighted {
+    fill: #ff0000;
+}
+
 .pcadot:hover {
     fill: #ff0000;
 }
@@ -25,6 +29,10 @@
 
 svg {
     float: left;
+}
+
+.outlier {
+    text-decoration: underline dotted;
 }
 
 /* Copied from assignment 1 */
