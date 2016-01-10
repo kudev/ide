@@ -53,7 +53,6 @@ for (var i = 0; i < data.length; ++i) {
             var p1 = new THREE.Vector3(data[i].x, data[i].y, data[i].z);
             var p2 = new THREE.Vector3(data[j].x, data[j].y, data[j].z);
             scene.add(cylinderMesh(p1, p2, colours.O));
-            // TODO Create binding
         }
     }
 }
