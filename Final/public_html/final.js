@@ -2,10 +2,6 @@
 
 d3.select(window).on('load', init);
 
-function init() {
-    initChart1();
-}
-
 function getX(d) {
     return d.date;
 }
@@ -14,13 +10,15 @@ function getY(d) {
     return d.open;
 }
 
-function initChart1() {
+function init() {
     var smallMargin = 20;
     var margin = 80;
 
     var chart = d3.select('#chart1');
     var width = parseInt(chart.style('width'));
     var height = parseInt(chart.attr('height'));
+
+    var tooltip = d3.select('.tooltip');
 
     var xScale = d3.scale.linear().range([margin, width - smallMargin])
             .domain([
@@ -29,8 +27,8 @@ function initChart1() {
 
     var yScale = d3.scale.linear().range([height - margin, smallMargin])
             .domain([
-                d3.min(data, getY),
-                d3.max(data, getY)]);
+                d3.min(data, getY) - .001,
+                d3.max(data, getY) + .001]);
     var xAxis = d3.svg.axis()
             .outerTickSize(-height + margin + smallMargin)
             .scale(xScale);
@@ -58,6 +56,36 @@ function initChart1() {
             .attr('y', -margin / 2)
             .style('text-anchor', 'end')
             .text('Temperature (°C)');
+
+    chart.selectAll("dot")
+            .data(data)
+            .enter().append("circle")
+            .attr("id", function (d) {
+                return d.date;
+            })
+            .attr("r", 5)
+            .attr("cx", function (d) {
+                return xScale(getX(d));
+            })
+            .attr("cy", function (d) {
+                return yScale(getY(d));
+            })
+            .on("mouseover", function (d, index) {
+                tooltip
+                        .transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                tooltip
+                        .html('<table><tr><td>Date:</td><td>' + getX(d) + '</td></tr>\
+                              <td>Value:</td><td>' + getY(d) + '</td></tr></table>')
+                        .style("left", (d3.event.pageX + 5) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", function (d) {
+                tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+            });
 
     var drawLine = d3.svg.line()
             .x(function (d) {
@@ -130,7 +158,7 @@ function initChart1() {
             .attr("y", function (d) {
                 return yScale(y2) - 10;
             });
-};
+}
 
 // http://bl.ocks.org/rkirsling/33a9e350516da54a5d4f
 // returns slope, intercept and r-square of the line
