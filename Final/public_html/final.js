@@ -1,10 +1,17 @@
+/* global d3, data */
+
+d3.select(window).on('load', init);
+
+function init() {
+    initChart1();
+}
+
 function getX(d) {
-    return d.YEAR;
+    return d.date;
 }
 
 function getY(d) {
-    var value = d.metANN;
-    return value === 999.9 ? undefined : value;
+    return d.open;
 }
 
 function initChart1() {
