@@ -3,52 +3,34 @@
 d3.select(window).on('load', init);
 
 function getX(d) {
-    var y = d.date/10000;
-    var m = (d.date/100)%100;
-    var day = d.date % 100;
-    
-    //proper return:
-    //return d.date;
-
-    //Return legible(ish)
-    return ((y*31*12)+(m*31)+day)/372;
+    return new Date(d.date);
 }
 
 function getY(d) {
     return d.open;
 }
 
-function launchIntoFullscreen(element) {
-  if(element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if(element.mozRequestFullScreen) {
-    element.mozRequestFullScreen();
-  } else if(element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen();
-  } else if(element.msRequestFullscreen) {
-    element.msRequestFullscreen();
-  }
-}
-
 function init() {
     var smallMargin = 20;
     var margin = 80;
 
-    var chart = d3.select('#chart1');
+    var chart = d3.select('#chart');
     var width = parseInt(chart.style('width'));
-    var height = parseInt(chart.attr('height'));
+    var height = parseInt(chart.style('height'));
 
     var tooltip = d3.select('.tooltip');
 
-    var xScale = d3.scale.linear().range([margin, width - smallMargin])
+    var xScale = d3.time.scale()
+            .range([margin, width - smallMargin])
             .domain([
                 d3.min(data, getX),
                 d3.max(data, getX)]);
 
-    var yScale = d3.scale.linear().range([height - margin, smallMargin])
+    var yScale = d3.scale.linear()
+            .range([height - margin, smallMargin])
             .domain([
-                d3.min(data, getY) - .001,
-                d3.max(data, getY) + .001]);
+                d3.min(data, getY) - .025,
+                d3.max(data, getY) + .025]);
     var xAxis = d3.svg.axis()
             .outerTickSize(-height + margin + smallMargin)
             .scale(xScale);
@@ -64,7 +46,7 @@ function init() {
             .append('text')
             .attr('x', width / 2)
             .attr('y', margin - smallMargin)
-            .text('Year');
+            .text('Date');
 
     chart.append('svg:g')
             .attr('class', 'axis')
@@ -75,28 +57,30 @@ function init() {
             .attr('x', -height / 2 + margin)
             .attr('y', -margin / 2)
             .style('text-anchor', 'end')
-            .text('Temperature (°C)');
+            .text('EUR/USD rate');
 
     chart.selectAll("dot")
             .data(data)
-            //.enter().append("circle")
+            .enter().append("circle")
             .attr("id", function (d) {
                 return d.date;
             })
-            .attr("r", 5)
+            .attr("r", 2)
             .attr("cx", function (d) {
                 return xScale(getX(d));
             })
             .attr("cy", function (d) {
                 return yScale(getY(d));
             })
-            .on("mouseover", function (d, index) {
+            .on("mouseover", function (d) {
+                var date = getX(d);
+                var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
                 tooltip
                         .transition()
                         .duration(200)
                         .style("opacity", .9);
                 tooltip
-                        .html('<table><tr><td>Date:</td><td>' + getX(d) + '</td></tr>\
+                        .html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
                               <td>Value:</td><td>' + getY(d) + '</td></tr></table>')
                         .style("left", (d3.event.pageX + 5) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
@@ -178,8 +162,6 @@ function init() {
             .attr("y", function (d) {
                 return yScale(y2) - 10;
             });
-    //What the hell is stuff called?
-    launchIntoFullscreen(chart);
 }
 
 // http://bl.ocks.org/rkirsling/33a9e350516da54a5d4f
