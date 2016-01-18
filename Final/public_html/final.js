@@ -1,7 +1,6 @@
 /* global d3, data */
 
 d3.select(window).on('load', init);
-
 function getX(d) {
     return new Date(d.date);
 }
@@ -10,22 +9,21 @@ function getY(d) {
     return d.open;
 }
 
+var bisector = d3.bisector(function (d) {
+    return new Date(d.date);
+}).left;
 function init() {
     var smallMargin = 20;
     var margin = 80;
-
-    var chart = d3.select('#chart');
-    var width = parseInt(chart.style('width'));
-    var height = parseInt(chart.style('height'));
-
+    var svg = d3.select('#chart');
+    var width = parseInt(svg.style('width'));
+    var height = parseInt(svg.style('height'));
     var tooltip = d3.select('.tooltip');
-
     var xScale = d3.time.scale()
             .range([margin, width - smallMargin])
             .domain([
                 d3.min(data, getX),
                 d3.max(data, getX)]);
-
     var yScale = d3.scale.linear()
             .range([height - margin, smallMargin])
             .domain([
@@ -38,18 +36,25 @@ function init() {
             .innerTickSize(-width + margin + smallMargin).outerTickSize(-width + margin + smallMargin)
             .scale(yScale)
             .orient('left');
-
-    chart.append('svg:g')
-            .attr('class', 'axis')
+    svg.append("svg:clipPath")
+            .attr("id", "clip")
+            .append("svg:rect")
+            .attr("x", margin)
+            .attr("y", smallMargin)
+            .attr("width", width - 2 * margin)
+            .attr("height", height - smallMargin - margin);
+    var chart = svg.append("g")
+            .attr("clip-path", "url(#clip)");
+    svg.append('svg:g')
+            .attr('class', 'x axis')
             .attr('transform', 'translate(0, ' + (height - margin) + ')')
             .call(xAxis)
             .append('text')
             .attr('x', width / 2)
             .attr('y', margin - smallMargin)
             .text('Date');
-
-    chart.append('svg:g')
-            .attr('class', 'axis')
+    svg.append('svg:g')
+            .attr('class', 'y axis')
             .attr('transform', 'translate(' + margin + ', 0)')
             .call(yAxis)
             .append('text')
@@ -58,38 +63,36 @@ function init() {
             .attr('y', -margin / 2)
             .style('text-anchor', 'end')
             .text('EUR/USD rate');
-
-    chart.selectAll("dot")
-            .data(data)
-            .enter().append("circle")
-            .attr("id", function (d) {
-                return d.date;
+    var focus = chart.append("g")
+            .style("display", "none");
+    focus.append("circle")
+            .attr("class", "y")
+            .style("fill", "none")
+            .style("stroke", "blue")
+            .attr("r", 5);
+    chart.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .on("mouseover", function () {
+                focus.style("display", null);
             })
-            .attr("r", 2)
-            .attr("cx", function (d) {
-                return xScale(getX(d));
+            .on("mouseout", function () {
+                focus.style("display", "none");
             })
-            .attr("cy", function (d) {
-                return yScale(getY(d));
-            })
-            .on("mouseover", function (d) {
-                var date = getX(d);
-                var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-                tooltip
-                        .transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                tooltip
-                        .html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
-                              <td>Value:</td><td>' + getY(d) + '</td></tr></table>')
-                        .style("left", (d3.event.pageX + 5) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", function (d) {
-                tooltip.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-            });
+            .on("mousemove", mousemove);
+    function mousemove() {
+        var x0 = xScale.invert(d3.mouse(this)[0]);
+        var i = bisector(data, x0);
+        var d = data[i];
+        var date = getX(d);
+        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        focus.select("circle.y")
+            .attr("transform", "translate(" + xScale(date + "," + yScale(getY(d)) + ")"));
+        tooltip.html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
+                        <td>Value:</td><td>' + getY(d) + '</td></tr></table>');
+    }
 
     var drawLine = d3.svg.line()
             .x(function (d) {
@@ -99,99 +102,22 @@ function init() {
                 return yScale(getY(d));
             })
             .interpolate('basis');
-
     chart.append('svg:path')
             .attr('d', drawLine(data))
-            .attr('stroke', 'blue')
-            .attr('stroke-width', 2)
-            .attr('fill', 'none');
+            .attr('class', 'line');
+    function onZoom() {
+        svg.select(".x.axis").call(xAxis);
+        svg.select(".y.axis").call(yAxis);
+        svg.select(".line")
+                .attr("class", "line")
+                .attr("d", drawLine(data));
+        svg.select("circle")
+                .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
 
-    // TREND LINE BELOW
-    // Based on http://bl.ocks.org/rkirsling/33a9e350516da54a5d4f
-    // 
-    // get the x and y values for least squares
-    var xLabels = data.map(getX);
-    var xSeries = d3.range(1, xLabels.length + 1);
-    var ySeries = data.map(getY);
-
-    var leastSquaresCoeff = leastSquares(xSeries, ySeries);
-    // apply the reults of the least squares regression
-    var x1 = xLabels[0];
-    var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-    var x2 = xLabels[xLabels.length - 1];
-    var y2 = leastSquaresCoeff[0] * xSeries.length + leastSquaresCoeff[1];
-    var trendData = [[x1, y1, x2, y2]];
-
-    var trendline = chart.selectAll(".trendline")
-            .data(trendData);
-
-    trendline.enter()
-            .append("line")
-            .attr("class", "trendline")
-            .attr("x1", function (d) {
-                return xScale(d[0]);
-            })
-            .attr("y1", function (d) {
-                return yScale(d[1]);
-            })
-            .attr("x2", function (d) {
-                return xScale(d[2]);
-            })
-            .attr("y2", function (d) {
-                return yScale(d[3]);
-            })
-            .attr("stroke", "black")
-            .attr("stroke-width", 1);
-
-    // display equation on the chart
-    chart.append("text")
-            .attr("class", "text-label")
-            .attr("x", function (d) {
-                return xScale(x2) - 60;
-            })
-            .attr("y", function (d) {
-                return yScale(y2) - 30;
-            });
-
-    // display r-square on the chart
-    chart.append("text")
-            .attr("class", "text-label")
-            .attr("x", function (d) {
-                return xScale(x2) - 60;
-            })
-            .attr("y", function (d) {
-                return yScale(y2) - 10;
-            });
-}
-
-// http://bl.ocks.org/rkirsling/33a9e350516da54a5d4f
-// returns slope, intercept and r-square of the line
-function leastSquares(xSeries, ySeries) {
-    var reduceSumFunc = function (prev, cur) {
-        return prev + cur;
-    };
-
-    var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
-    var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
-
-    var ssXX = xSeries.map(function (d) {
-        return Math.pow(d - xBar, 2);
-    })
-            .reduce(reduceSumFunc);
-
-    var ssYY = ySeries.map(function (d) {
-        return Math.pow(d - yBar, 2);
-    })
-            .reduce(reduceSumFunc);
-
-    var ssXY = xSeries.map(function (d, i) {
-        return (d - xBar) * (ySeries[i] - yBar);
-    })
-            .reduce(reduceSumFunc);
-
-    var slope = ssXY / ssXX;
-    var intercept = yBar - (xBar * slope);
-    var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
-
-    return [slope, intercept, rSquare];
+    var zoom = d3.behavior.zoom()
+            .x(xScale)
+            .y(yScale)
+            .on("zoom", onZoom);
+    svg.call(zoom);
 }

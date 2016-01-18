@@ -8,11 +8,19 @@
     stroke: rgba(0, 0, 0, 0.1);
 }
 
+.line {
+    fill: none;
+    stroke: #0000ff;
+    stroke-width: 2px;
+}
+
 circle {
     fill: #0000ff;
 }
 
 .tooltip {
+    left: 95px;
+    top: 21px;
     pointer-events: none;
     position: absolute;
     width: 128px;
@@ -23,19 +31,6 @@ circle {
     border-radius: 0px 3.2px 3.2px 0px;
     text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
     box-shadow: rgb(85, 153, 51) -4px 0px 4px 0px inset;
-    margin-left: 24px;
-}
-
-.tooltip:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-width: 26px;
-    border-style: solid;
-    border-color: transparent #60AC39 transparent transparent;
-    top: 0px;
-    left: -48px;
 }
 
 html {
