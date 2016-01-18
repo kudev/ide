@@ -109,7 +109,21 @@ function init() {
     chart.append('svg:path')
             .attr('d', drawLine(data))
             .attr('class', 'line');
-
+    
+    function drawEvents() {
+        chart.selectAll("dot").data(events)
+            .enter().append("circle")
+            .attr("class", "event")
+            .attr("r", 10)
+            .attr("cx", function (d) { return xScale(getX(d)); })
+            .attr("cy", function () { return height - 2*margin; })
+            .on("click", function(d, index) {
+                alert(events[index].description);
+            });
+    };
+    
+    drawEvents();
+    
     chart.selectAll("dot")
            .data(events)
            .enter().append("circle")
@@ -126,12 +140,7 @@ function init() {
         svg.select(".y.axis").call(yAxis);
         svg.select(".line").attr("transform", "translate(" + [tx, ty] + ")scale(" + d3.event.scale + ")");
         chart.selectAll("circle").remove();
-        chart.selectAll("dot").data(events)
-            .enter().append("circle")
-            .attr("class", "event")
-            .attr("r", 10)
-            .attr("cx", function (d) { return xScale(getX(d)); })
-            .attr("cy", function () { return height - 2*margin; });
+        drawEvents();
     }
 
     var zoom = d3.behavior.zoom()

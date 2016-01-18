@@ -18,6 +18,10 @@ circle {
     fill: #00ff00;
 }
 
+circle:hover {
+    fill:#ffff00;
+}
+
 .tooltip {
     left: 65px;
     top: 11px;

@@ -5,7 +5,7 @@ var events = [
         "tooltip": "George W. Bush Elected"
     },
     {
-        "date": "2001-9-11",
+        "date": "2001-09-11",
         "description": "<h2>9/11</h2><p>Terrorist attacks on the world trade center fuels U.S.A. and President George W. Bush to start a \"War on Terror\" resulting in an invasion of Afghanistan and war in the middle east. The U.S. Dollar keeps falling compared to the Euro.</p>",
         "tooltip": "9/11 Terrorist attacks"
     },/*
