@@ -9,12 +9,16 @@ function getY(d) {
     return d.open;
 }
 
+function pad(x) {
+    return ("00" + x).substr(("" + x).length);
+}
+
 var bisector = d3.bisector(function (d) {
     return new Date(d.date);
 }).left;
 function init() {
-    var smallMargin = 20;
-    var margin = 80;
+    var smallMargin = 10;
+    var margin = 50;
     var svg = d3.select('#chart');
     var width = parseInt(svg.style('width'));
     var height = parseInt(svg.style('height'));
@@ -41,7 +45,7 @@ function init() {
             .append("svg:rect")
             .attr("x", margin)
             .attr("y", smallMargin)
-            .attr("width", width - 2 * margin)
+            .attr("width", width - 2 * smallMargin)
             .attr("height", height - smallMargin - margin);
     var chart = svg.append("g")
             .attr("clip-path", "url(#clip)");
@@ -63,6 +67,7 @@ function init() {
             .attr('y', -margin / 2)
             .style('text-anchor', 'end')
             .text('EUR/USD rate');
+
     var focus = chart.append("g")
             .style("display", "none");
     focus.append("circle")
@@ -82,14 +87,16 @@ function init() {
                 focus.style("display", "none");
             })
             .on("mousemove", mousemove);
+
     function mousemove() {
         var x0 = xScale.invert(d3.mouse(this)[0]);
         var i = bisector(data, x0);
         var d = data[i];
         var date = getX(d);
-        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+        var dateString = date.getFullYear() + '-' + (pad(date.getMonth() + 1)) + '-' + pad(date.getDate());
         focus.select("circle.y")
-            .attr("transform", "translate(" + xScale(date + "," + yScale(getY(d)) + ")"));
+                .attr("transform", "translate(" + xScale(date + "," + yScale(getY(d)) + ")"));
         tooltip.html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
                         <td>Value:</td><td>' + getY(d) + '</td></tr></table>');
     }
@@ -105,19 +112,20 @@ function init() {
     chart.append('svg:path')
             .attr('d', drawLine(data))
             .attr('class', 'line');
+
     function onZoom() {
+        var tx = Math.min(0, d3.event.translate[0]);
+        var ty = Math.min(0, d3.event.translate[1]);
+        zoom.translate([tx, ty]);
         svg.select(".x.axis").call(xAxis);
         svg.select(".y.axis").call(yAxis);
-        svg.select(".line")
-                .attr("class", "line")
-                .attr("d", drawLine(data));
-        svg.select("circle")
-                .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        svg.select(".line").attr("transform", "translate(" + [tx, ty] + ")scale(" + d3.event.scale + ")");
     }
 
     var zoom = d3.behavior.zoom()
             .x(xScale)
             .y(yScale)
+            .scaleExtent([1, 10])
             .on("zoom", onZoom);
     svg.call(zoom);
 }

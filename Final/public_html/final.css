@@ -19,8 +19,8 @@ circle {
 }
 
 .tooltip {
-    left: 95px;
-    top: 21px;
+    left: 65px;
+    top: 11px;
     pointer-events: none;
     position: absolute;
     width: 128px;
