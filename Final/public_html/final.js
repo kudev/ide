@@ -1,6 +1,5 @@
-/* global d3, data */
+/* global d3, data, events */
 
-d3.select(window).on('load', init);
 function getX(d) {
     return new Date(d.date);
 }
@@ -16,6 +15,7 @@ function pad(x) {
 var bisector = d3.bisector(function (d) {
     return new Date(d.date);
 }).left;
+
 function init() {
     var smallMargin = 10;
     var margin = 50;
@@ -96,23 +96,28 @@ function init() {
 
         var dateString = date.getFullYear() + '-' + (pad(date.getMonth() + 1)) + '-' + pad(date.getDate());
         focus.select("circle.y")
-                .attr("transform", "translate(" + xScale(date + "," + yScale(getY(d)) + ")"));
+                .attr("transform", "translate(" + xScale(date) + "," + yScale(getY(d)) + ")");
         tooltip.html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
                         <td>Value:</td><td>' + getY(d) + '</td></tr></table>');
     }
 
     var drawLine = d3.svg.line()
-            .x(function (d) {
-                return xScale(getX(d));
-            })
-            .y(function (d) {
-                return yScale(getY(d));
-            })
-            .interpolate('basis');
+        .x(function (d) { return xScale(getX(d)); })
+        .y(function (d) { return yScale(getY(d)); })
+        .interpolate('basis');
+
     chart.append('svg:path')
             .attr('d', drawLine(data))
             .attr('class', 'line');
 
+    chart.selectAll("dot")
+           .data(events)
+           .enter().append("circle")
+           .attr("class", "event")
+           .attr("r", 10)
+           .attr("cx", function (d) { return xScale(getX(d)); })
+           .attr("cy", function () { return height - 2*margin; });
+    
     function onZoom() {
         var tx = Math.min(0, d3.event.translate[0]);
         var ty = Math.min(0, d3.event.translate[1]);
@@ -120,6 +125,13 @@ function init() {
         svg.select(".x.axis").call(xAxis);
         svg.select(".y.axis").call(yAxis);
         svg.select(".line").attr("transform", "translate(" + [tx, ty] + ")scale(" + d3.event.scale + ")");
+        chart.selectAll("circle").remove();
+        chart.selectAll("dot").data(events)
+            .enter().append("circle")
+            .attr("class", "event")
+            .attr("r", 10)
+            .attr("cx", function (d) { return xScale(getX(d)); })
+            .attr("cy", function () { return height - 2*margin; });
     }
 
     var zoom = d3.behavior.zoom()
@@ -129,3 +141,5 @@ function init() {
             .on("zoom", onZoom);
     svg.call(zoom);
 }
+
+d3.select(window).on('load', init);
