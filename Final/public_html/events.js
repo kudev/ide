@@ -1,49 +1,61 @@
 var events = [
     {
         "date": "2001-01-20",
-        "enddate": "2009-01-19",
-        "desc": "George W. Bush Elected"
+        "tooltip": "George W. Bush Elected"
+        "description": "<h2>George W. Bush Elected</h2>
+        <p>The US Dollar is standing strong, leaving the 20th century. George W. Bush is elected while the dollar keeps becoming stronger.</p>
+        ",
     },
     {
         "date": "2001-9-11",
-        "desc": "9/11 Terrorist attacks"
-    },
+        "description": "<h2>9/11</h2>
+        <p>Terrorist attacks on the world trade center fuels U.S.A. and President George W. Bush to start a \"War on Terror\"
+        resulting in an invasion of Afghanistan and war in the middle east. The U.S. Dollar keeps falling compared to the Euro.</p>",
+        "tooltip": "9/11 Terrorist attacks"
+    },/*
     {
         "date": "2001-10-07",
-        "desc": "Invasion of Afghanistan"
+        "tooltip": "Invasion of Afghanistan"
     },
     {
         "date": "2003-03-20",
-        "enddate": "2011-12-15",
-        "desc": "Invasion of Iraq"
-    },
+        "description": "",
+        "tooltip": "Invasion of Iraq"
+    },*/
     {
         "date": "2005-11-22",
-        "desc": "Angela Merkel becomes Chancellor of Germany"
+        "description": "<h2>Angela Merkel Becomes Chancellor of Germany</h2>
+        <p>The Euro has been strong for a long time, but hits it's lowest point in over 2 years. After her inauguration the Euro climbs for 3 years
+        up to the point where the Financial Crisis takes place.</p>",
+        "tooltip": "Angela Merkel becomes Chancellor of Germany"
     },
     {
         "date": "2008-01-01",
-        "enddate": "20010-12-31",
-        "desc": "Financial Crisis years"
-    },
+        "description": "<h2>Financial Crisis</h2>
+        <p>Real estate market in the U.S. collapses, bringing about financial instability and recession worldwide. Obama is elected during this time,
+        striving to reduce USA's military involvement.</p>",
+        "tooltip": "Financial Crisis years"
+    },/*
     {
         "date": "2009-01-20",
-        "enddate": "2009-01-19",
-        "desc": "Barack Obama Elected"
+        "tooltip": "Barack Obama Elected"
     },
     {
         "date": "2011-05-02",
-        "desc": "Osama Bin Laden dies"
-    },
+        "tooltip": "Osama Bin Laden dies"
+    },*/
     {
         "date": "2012-07-15",
-        "desc": "Syria situation declared Civil War"
-    },
+        "description": "<h2>Civil War in Syria</h2>
+        <p>The fighting in Syria escalates to a point where it is named a civil war. Emigration from the impacted areas increases 
+        drastically over the coming years, placing a strain upon the european recieving countries' economies.</p>",
+        "tooltip": "Syria situation declared Civil War"
+    }/*,
     {
         "date": "2012-06-21",
-        "desc": "Snowden charged with espionage"
+        "tooltip": "Snowden charged with espionage"
     },
-    {
+    { Not in the data set.
         "date": "2015-11-13",
-        "desc": "Paris terrorist attacks"
-    }];
+        "tooltip": "Paris terrorist attacks"
+    }*/];
