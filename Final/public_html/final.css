@@ -32,7 +32,7 @@ circle:hover {
     background-color: rgba(169,169,169,0.3);
     border-color: rgba(255,255,255,0.3);
     border-style: solid;
-    
+    text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }/*
 h1 {
