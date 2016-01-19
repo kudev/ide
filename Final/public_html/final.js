@@ -180,7 +180,7 @@ function init() {
     }
 
     drawEvents();
-
+    
     function onZoom() {
         var tx = Math.min(0, d3.event.translate[0]);
         var ty = Math.min(0, d3.event.translate[1]);
