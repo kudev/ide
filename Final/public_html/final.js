@@ -23,6 +23,7 @@ function init() {
     var width = parseInt(svg.style('width'));
     var height = parseInt(svg.style('height'));
     var tooltip = d3.select('.tooltip');
+    var sidebar = d3.select('.sidebar');
     var zoom;
 
     var xScale = d3.time.scale()
@@ -130,6 +131,8 @@ function init() {
                 svg.transition()
                     .duration(750)
                     .call(zoom.translate(translate).scale(scale).event);
+            
+                sidebar.html(d.description);
             });
     }
     
