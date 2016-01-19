@@ -8,6 +8,10 @@
     stroke: rgba(0, 0, 0, 0.1);
 }
 
+text {
+    fill: #e6e6e6;
+}
+
 .line {
     fill: none;
     stroke: #00BFFF;
@@ -23,15 +27,14 @@ circle:hover {
 }
 
 .popup {
+    z-index: 999;
     position: fixed;
-    top: 12%;
+    top: 6%;
     left: 5%;
     width: 90%;
-    /*height: 60%;*/
     text-shadow: 1px 1px #333333;
-    background-color: rgba(169,169,169,0.6);
-    border-color: rgba(255,255,255,0.6);
-    border-style: solid;
+    background-color: rgba(169,169,169,0.8);
+    border: 1px solid rgba(255,255,255,0.8);
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
@@ -61,7 +64,6 @@ circle:hover {
     width: 110px;
     height: 43px;
     padding: 0px 16px 0px 8px;
-    color: rgb(255, 255, 255);
     background: rgb(65,105,225);
     border: 1px solid white;
     text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
@@ -76,7 +78,6 @@ circle:hover {
     position: absolute;
     width: 230px;
     padding: 0px 16px 0px 8px;
-    color: rgb(255, 255, 255);
     background: rgb(65,105,225);
     border: 1px solid white;
     text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
@@ -101,5 +102,6 @@ body {
     max-width: 98%;
     margin: auto;
     text-align: justify;
+    color: white;
     background: rgb(47, 79, 79);
 }

@@ -97,7 +97,7 @@ function init() {
             .call(xAxis)
             .append('text')
             .attr('x', width / 2)
-            .attr('y', margin - smallMargin)
+            .attr('y', 40)
             .text('Date');
 
     svg.append('svg:g')
@@ -107,7 +107,7 @@ function init() {
             .append('text')
             .attr('transform', 'rotate(-90)')
             .attr('x', -height / 2 + margin)
-            .attr('y', -margin / 2)
+            .attr('y', -35)
             .style('text-anchor', 'end')
             .text('EUR/USD rate');
 
