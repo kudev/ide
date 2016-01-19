@@ -21,6 +21,12 @@ var events = [/*
         "tooltip": "Invasion of Iraq"
     },*/
     {
+        "date": "2005-08-29",
+        "description": "<h2>Hurricane Katrina</h2><p>Hurricane Katrina hits New Orleans and causes massive destruction, creating damage for 108 billion dollars, ruining around 400.000 jobs. <a href=\"https://en.wikipedia.org/wiki/Hurricane_Katrina\">Source</a></p>",
+        "tooltip": "Hurricane Katrina",
+        "open": 1.25
+    },
+    {
         "date": "2005-11-22",
         "description": "<h2>Angela Merkel Becomes Chancellor of Germany</h2><p>The Euro has been strong for a long time, but hits it's lowest point in over 2 years. After her inauguration the Euro climbs for 3 years, up to the point where the Financial Crisis takes place. <a href=\"https://en.wikipedia.org/wiki/Angela_Merkel\">Source</a></p>",
         "tooltip": "Angela Merkel becomes Chancellor of Germany",
