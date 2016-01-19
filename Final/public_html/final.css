@@ -76,7 +76,7 @@ text {
 }
 
 #tooltip {
-    left: 65px;
+    left: 70px;
     top: 11px;
     width: 110px;
     height: 43px;
@@ -84,7 +84,7 @@ text {
 }
 
 #sidebar {
-    right: 26px;
+    right: 31px;
     top: 11px;
     pointer-events: none;
     width: 230px;
