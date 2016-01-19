@@ -31,7 +31,19 @@ var events = [/*
         "description": "<h2>Financial Crisis</h2><p>Real estate market in the U.S. collapses, bringing about financial instability and recession worldwide. Obama is elected during this time, striving to reduce USA's military involvement. Multiple government bailouts happened in America, artificially avoiding bankruptcy for a number of American banks. <a href=\"https://en.wikipedia.org/wiki/Great_Recession\">Source</a></p>",
         "tooltip": "Financial Crisis years",
         "open": 1.5
+    },
+    {
+        "date": "2009-01-19",
+        "description": "<h2>Blue Monday Crash</h2><p>British bank shares falls drastically, RBS falls 67% in a single day. On the 22nd. of January, it is estimated that the four largest U.S. banks have lost half their value since january 2nd. and the next day dramatic lossesDow Jones falls to 6440, the lowest since 1996, whereafter a countertrend bear market rally began, taking Dow up to 8500 in the start of May.<a href=\"https://en.wikipedia.org/wiki/Global_financial_crisis_in_2009\">Source</a></p>",
+        "tooltip": "Financial Crisis years",
+        "open": 1.3
+    },
+    {
+        "date": "2009-12-01",
+        "description": "<h2>European Debt Crisis</h2><p>Several European countries (Greece, Portugal, Spain, etc.) couldn't repay their international loans, pushing them to the verge of bankruptcy, causing a weakining in the euro. </p><a href='https://en.wikipedia.org/wiki/European_debt_crisis'>Source</a>",
+        "open": 1.46
     },/*
+
     {
         "date": "2009-01-20",
         "tooltip": "Barack Obama Elected"
