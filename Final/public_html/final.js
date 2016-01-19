@@ -49,7 +49,9 @@ function gotoEvent(index) {
     svg.transition()
        .duration(750)
        .call(zoom.translate(translate).scale(scale).event);
-
+    
+    d3.select("#leftarrow").attr("class", currentEvent > 0 ? "arrow" : "arrow invisible");
+    d3.select("#rightarrow").attr("class", currentEvent < events.length - 1 ? "arrow" : "arrow invisible");
     sidebar.html(dateToString(getX(d)) + '<br />' + d.description);
 }
 
@@ -203,6 +205,17 @@ function init() {
             if (currentEvent < events.length - 1) {
                 gotoEvent(currentEvent + 1);
             }
+        }
+    });
+
+    d3.select("#leftarrow").on("click", function() {
+        if (currentEvent >= 0) {
+            gotoEvent(currentEvent - 1);
+        }
+    });
+    d3.select("#rightarrow").on("click", function() {
+        if (currentEvent < events.length - 1) {
+            gotoEvent(currentEvent + 1);
         }
     });
 }
