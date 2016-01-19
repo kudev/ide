@@ -55,7 +55,7 @@ circle:hover {
 }
 
 .tooltip {
-    left: 68px;
+    left: 65px;
     top: 11px;
     pointer-events: none;
     position: absolute;
