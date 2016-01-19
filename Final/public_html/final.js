@@ -118,9 +118,16 @@ function init() {
             .attr("cx", function (d) { return xScale(getX(d)); })
             .attr("cy", function () { return height - 2*margin; })
             .on("click", function(d, index) {
-                alert(events[index].description);
+                //Zooms in, where's the 'drag' stuff to move the camera?
+                zoom.translate([1, 1]);
+                //alert(events[index].description);
             });
     };
+
+    function gotoEvent(index) {
+        alert(events[index].description);
+
+    }
     
     drawEvents();
     
