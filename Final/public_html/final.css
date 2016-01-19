@@ -29,8 +29,8 @@ circle:hover {
     width: 90%;
     /*height: 60%;*/
     text-shadow: 1px 1px #333333;
-    background-color: rgba(169,169,169,0.3);
-    border-color: rgba(255,255,255,0.3);
+    background-color: rgba(169,169,169,0.6);
+    border-color: rgba(255,255,255,0.6);
     border-style: solid;
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -62,11 +62,11 @@ circle:hover {
     width: 128px;
     padding: 0px 16px 0px 8px;
     color: rgb(255, 255, 255);
-    background: rgb(0,0,128);
+    background: rgb(65,105,225);
     border: 0px 0px 0px 0px none none none none rgb(255, 255, 255) rgb(70, 126, 42) rgb(255, 255, 255) rgb(255, 255, 255);
     border-radius: 0px 0px 3.2px 0px;
     text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
-    box-shadow: rgb(0,0,84) -4px -4px 2px 1px inset;
+    /*box-shadow: rgb(0,0,84) -4px -4px 2px 1px inset;*/
     font-size: 12px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
@@ -79,11 +79,11 @@ circle:hover {
     width: 230px;
     padding: 0px 16px 0px 8px;
     color: rgb(255, 255, 255);
-    background: rgb(0,0,128);
+    background: rgb(65,105,225);
     border: 0px 0px 0px 0px none none none none rgb(255, 255, 255) rgb(70, 126, 42) rgb(255, 255, 255) rgb(255, 255, 255);
     border-radius: 0px 0px 0px 3.2px;
     text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 1px;
-    box-shadow: rgb(0,0,84) 4px -4px 4px 3px inset;
+    /*box-shadow: rgb(0,0,84) 4px -4px 4px 3px inset;*/
     text-align: right;
     text-shadow: 0px 0px #ffffff;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
