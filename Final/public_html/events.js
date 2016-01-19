@@ -40,11 +40,12 @@ var events = [
         "date": "2012-07-15",
         "description": "<h2>Civil War in Syria</h2><p>The fighting in Syria escalates to a point where it is named a civil war. Emigration from the impacted areas increases drastically over the coming years, placing a strain upon the european recieving countries' economies.</p>",
         "tooltip": "Syria situation declared Civil War"
-    }/*,
-    {
-        "date": "2012-06-21",
-        "tooltip": "Snowden charged with espionage"
     },
+    {
+        "date": "2014-04-28",
+        "description": "<h2>Russia annexes Crimea</h2><p>Russia annexes Crimea, causing Barack Obama to sign an economic sanction against Russia.</p>",
+        "tooltip": "Russia annexes Crimea"
+    }/*,
     { Not in the data set.
         "date": "2015-11-13",
         "tooltip": "Paris terrorist attacks"
