@@ -107,7 +107,7 @@ function init() {
     var drawLine = d3.svg.line()
         .x(function (d) { return xScale(getX(d)); })
         .y(function (d) { return yScale(getY(d)); })
-        .interpolate('basis');
+        .interpolate('cardinal');
 
     chart.append('svg:path')
             .attr('d', drawLine(data))
