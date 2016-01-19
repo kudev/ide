@@ -23,6 +23,8 @@ function init() {
     var width = parseInt(svg.style('width'));
     var height = parseInt(svg.style('height'));
     var tooltip = d3.select('.tooltip');
+    var zoom;
+
     var xScale = d3.time.scale()
             .range([margin, width - smallMargin])
             .domain([
@@ -117,16 +119,18 @@ function init() {
             .attr("r", 10)
             .attr("cx", function (d) { return xScale(getX(d)); })
             .attr("cy", function () { return height - 2*margin; })
-            .on("click", function(d, index) {
-                //Zooms in, where's the 'drag' stuff to move the camera?
-                zoom.translate([1, 1]);
-                //alert(events[index].description);
+            .on("click", function(d) {
+                var dx = 200;
+                var dy = 100;
+                var x = xScale(getX(d));
+                var y = yScale(getY(d));
+                var scale = .9 / Math.max(dx / width, dy / height);
+                var translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+                svg.transition()
+                    .duration(750)
+                    .call(zoom.translate(translate).scale(scale).event);
             });
-    };
-
-    function gotoEvent(index) {
-        alert(events[index].description);
-
     }
     
     drawEvents();
@@ -150,7 +154,7 @@ function init() {
         drawEvents();
     }
 
-    var zoom = d3.behavior.zoom()
+    zoom = d3.behavior.zoom()
             .x(xScale)
             .y(yScale)
             .scaleExtent([1, 10])
