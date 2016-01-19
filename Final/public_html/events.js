@@ -48,7 +48,7 @@ var events = [
     },
     {
         "date": "2014-04-28",
-        "description": "<h2>Russia annexes Crimea</h2><p>Russia annexes Crimea, causing Barack Obama to sign an economic sanction against Russia.</p>",
+        "description": "<h2>Russia annexes Crimea</h2><p>Russia annexes Crimea, causing Barack Obama to sign an economic sanction against Russia, the European Union follows suit shortly after. The European Union had a lot more trade with Russia, and the Euro suffers more than the dollar. <a href=\"https://en.wikipedia.org/wiki/International_sanctions_during_the_Ukrainian_crisis\">Source</a>",
         "tooltip": "Russia annexes Crimea",
         "open": 1.4
     }/*,
