@@ -36,18 +36,18 @@ var yScale;
 function gotoEvent(index) {
     currentEvent = index;
 
-    svg.call(zoom.translate([0,0]).scale(0).event);
+    svg.transition().duration(750).call(zoom.translate([0,0]).scale(0).event);
 
     var d = events[index];
     var dx = 100;
-    var dy = 50;
+    var dy = 150;
     var x = xScale(getX(d));
     var y = yScale(getY(d));
     var scale = .8 / Math.max(dx / width, dy / height);
     var translate = [width / 2 - scale * x, height / 2 - scale * y];
 
     svg.transition()
-       .duration(750)
+       .duration(1500)
        .call(zoom.translate(translate).scale(scale).event);
     
     d3.select("#leftarrow").attr("class", currentEvent > 0 ? "arrow" : "arrow invisible");
@@ -114,10 +114,8 @@ function init() {
     var focus = chart.append("g")
             .style("display", "none");
     focus.append("circle")
-            .attr("class", "y")
-            .style("fill", "none")
-            .style("stroke", "blue")
-            .attr("r", 5);
+            .attr("class", "reader")
+            .attr("r", 3);
     chart.append("rect")
             .attr("width", width)
             .attr("height", height)
@@ -137,7 +135,7 @@ function init() {
         var d = data[i];
         var date = getX(d);
 
-        focus.select("circle.y")
+        focus.select("circle.reader")
             .attr("transform", "translate(" + xScale(date) + "," + yScale(getY(d)) + ")");
         tooltip.html('<table><tr><td>Date:</td><td>' + dateToString(date) + '</td></tr>\
                         <td>Value:</td><td>' + getY(d) + '</td></tr></table>');
@@ -151,7 +149,7 @@ function init() {
     chart.append('svg:path')
         .attr('d', drawLine(data))
         .attr('class', 'line');
-    
+
     function drawEvents() {
         chart.selectAll(".event").remove();
         chart.selectAll(".eventline").remove();
@@ -166,7 +164,7 @@ function init() {
             .on("click", function(d, index) {
                 gotoEvent(index);
             });
-            
+
         var drawEventLine = d3.svg.line()
             .x(function (d) { return xScale(getX(d)); })
             .y(function (d) { return yScale(getY(d)); })
@@ -178,9 +176,9 @@ function init() {
             chart.append('svg:path')
                 .attr('d', drawEventLine(eventLine))
                 .attr('class', 'eventline');
-        }    
+        }
     }
-    
+
     drawEvents();
 
     function onZoom() {
@@ -222,6 +220,10 @@ function init() {
         if (currentEvent < events.length - 1) {
             gotoEvent(currentEvent + 1);
         }
+    });
+    d3.select("#popup").on("click", function() {
+        d3.select("#popup").remove();
+        gotoEvent(0);
     });
 }
 
