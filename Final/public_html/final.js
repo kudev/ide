@@ -57,8 +57,8 @@ function gotoEvent(index) {
 
 function init() {
     svg = d3.select('#chart');
-    tooltip = d3.select('.tooltip');
-    sidebar = d3.select('.sidebar');
+    tooltip = d3.select('#tooltip');
+    sidebar = d3.select('#sidebar');
     width = parseInt(svg.style('width'));
     height = parseInt(svg.style('height'));
     
@@ -157,24 +157,16 @@ function init() {
             .enter().append("circle")
             .attr("class", "event")
             .attr("id", function (d) { return "event-" + dateToString(getX(d)); })
-            .attr("r", 10)
+            .attr("r", 20)
             .attr("cx", function (d) { return xScale(getX(d)); })
-            .attr("cy", function () { return height - 2*margin; })
+            .attr("cy", function () { return height - margin; })
             .on("click", function(d, index) {
                 gotoEvent(index);
             });
     }
     
     drawEvents();
-    
-    chart.selectAll("dot")
-           .data(events)
-           .enter().append("circle")
-           .attr("class", "event")
-           .attr("r", 10)
-           .attr("cx", function (d) { return xScale(getX(d)); })
-           .attr("cy", function () { return height - 2*margin; });
-    
+
     function onZoom() {
         /*var tx = Math.min(0, d3.event.translate[0]);
         var ty = Math.min(0, d3.event.translate[1]);*/
