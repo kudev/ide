@@ -12,26 +12,60 @@ function pad(x) {
     return ("00" + x).substr(("" + x).length);
 }
 
+function dateToString(date) {
+    return date.getFullYear() + '-' + (pad(date.getMonth() + 1)) + '-' + pad(date.getDate());
+}
+
 var bisector = d3.bisector(function (d) {
     return new Date(d.date);
 }).left;
 
-function init() {
-    var smallMargin = 10;
-    var margin = 50;
-    var svg = d3.select('#chart');
-    var width = parseInt(svg.style('width'));
-    var height = parseInt(svg.style('height'));
-    var tooltip = d3.select('.tooltip');
-    var sidebar = d3.select('.sidebar');
-    var zoom;
+var smallMargin = 10;
+var margin = 50;
+var currentEvent = -1;
+var width;
+var height;
 
-    var xScale = d3.time.scale()
+var svg;
+var tooltip;
+var sidebar;
+var zoom;
+var xScale;
+var yScale;
+
+function gotoEvent(index) {
+    currentEvent = index;
+
+    svg.call(zoom.translate([0,0]).scale(0).event);
+
+    var d = events[index];
+    var dx = 100;
+    var dy = 50;
+    var x = xScale(getX(d));
+    var y = yScale(getY(d));
+    var scale = .8 / Math.max(dx / width, dy / height);
+    var translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+    svg.transition()
+       .duration(750)
+       .call(zoom.translate(translate).scale(scale).event);
+
+    sidebar.html(dateToString(getX(d)) + '<br />' + d.description);
+}
+
+function init() {
+    svg = d3.select('#chart');
+    tooltip = d3.select('.tooltip');
+    sidebar = d3.select('.sidebar');
+    width = parseInt(svg.style('width'));
+    height = parseInt(svg.style('height'));
+    
+    xScale = d3.time.scale()
             .range([margin, width - smallMargin])
             .domain([
                 d3.min(data, getX),
                 d3.max(data, getX)]);
-    var yScale = d3.scale.linear()
+    yScale = d3.scale.linear()
             .range([height - margin, smallMargin])
             .domain([
                 d3.min(data, getY) - .025,
@@ -43,6 +77,7 @@ function init() {
             .innerTickSize(-width + margin + smallMargin).outerTickSize(-width + margin + smallMargin)
             .scale(yScale)
             .orient('left');
+
     svg.append("svg:clipPath")
             .attr("id", "clip")
             .append("svg:rect")
@@ -50,8 +85,10 @@ function init() {
             .attr("y", smallMargin)
             .attr("width", width - 2 * smallMargin)
             .attr("height", height - smallMargin - margin);
+
     var chart = svg.append("g")
             .attr("clip-path", "url(#clip)");
+
     svg.append('svg:g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0, ' + (height - margin) + ')')
@@ -60,6 +97,7 @@ function init() {
             .attr('x', width / 2)
             .attr('y', margin - smallMargin)
             .text('Date');
+
     svg.append('svg:g')
             .attr('class', 'y axis')
             .attr('transform', 'translate(' + margin + ', 0)')
@@ -97,10 +135,9 @@ function init() {
         var d = data[i];
         var date = getX(d);
 
-        var dateString = date.getFullYear() + '-' + (pad(date.getMonth() + 1)) + '-' + pad(date.getDate());
         focus.select("circle.y")
-                .attr("transform", "translate(" + xScale(date) + "," + yScale(getY(d)) + ")");
-        tooltip.html('<table><tr><td>Date:</td><td>' + dateString + '</td></tr>\
+            .attr("transform", "translate(" + xScale(date) + "," + yScale(getY(d)) + ")");
+        tooltip.html('<table><tr><td>Date:</td><td>' + dateToString(date) + '</td></tr>\
                         <td>Value:</td><td>' + getY(d) + '</td></tr></table>');
     }
 
@@ -110,29 +147,19 @@ function init() {
         .interpolate('cardinal');
 
     chart.append('svg:path')
-            .attr('d', drawLine(data))
-            .attr('class', 'line');
+        .attr('d', drawLine(data))
+        .attr('class', 'line');
     
     function drawEvents() {
         chart.selectAll("dot").data(events)
             .enter().append("circle")
             .attr("class", "event")
+            .attr("id", function (d) { return "event-" + dateToString(getX(d)); })
             .attr("r", 10)
             .attr("cx", function (d) { return xScale(getX(d)); })
             .attr("cy", function () { return height - 2*margin; })
-            .on("click", function(d) {
-                var dx = 200;
-                var dy = 100;
-                var x = xScale(getX(d));
-                var y = yScale(getY(d));
-                var scale = .9 / Math.max(dx / width, dy / height);
-                var translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-                svg.transition()
-                    .duration(750)
-                    .call(zoom.translate(translate).scale(scale).event);
-            
-                sidebar.html(d.description);
+            .on("click", function(d, index) {
+                gotoEvent(index);
             });
     }
     
@@ -147,8 +174,10 @@ function init() {
            .attr("cy", function () { return height - 2*margin; });
     
     function onZoom() {
-        var tx = Math.min(0, d3.event.translate[0]);
-        var ty = Math.min(0, d3.event.translate[1]);
+        /*var tx = Math.min(0, d3.event.translate[0]);
+        var ty = Math.min(0, d3.event.translate[1]);*/
+        var tx = d3.event.translate[0];
+        var ty = d3.event.translate[1];
         zoom.translate([tx, ty]);
         svg.select(".x.axis").call(xAxis);
         svg.select(".y.axis").call(yAxis);
@@ -163,6 +192,19 @@ function init() {
             .scaleExtent([1, 10])
             .on("zoom", onZoom);
     svg.call(zoom);
+    
+    d3.select("body").on("keydown", function() {
+        var key = d3.event.keyCode;
+        if (key === 37) { // LEFT ARROW
+            if (currentEvent >= 0) {
+                gotoEvent(currentEvent - 1);
+            }
+        } else if (key === 39) { // RIGHT ARROW
+            if (currentEvent < events.length - 1) {
+                gotoEvent(currentEvent + 1);
+            }
+        }
+    });
 }
 
 d3.select(window).on('load', init);
