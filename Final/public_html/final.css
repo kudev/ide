@@ -8,8 +8,13 @@
     stroke: rgba(0, 0, 0, 0.1);
 }
 
+.eventline {
+    stroke: #79e11b;
+}
+
 .event {
     fill: #79e11b;
+    z-index: 998;
 }
 
 .event:hover {

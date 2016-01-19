@@ -153,6 +153,9 @@ function init() {
         .attr('class', 'line');
     
     function drawEvents() {
+        chart.selectAll(".event").remove();
+        chart.selectAll(".eventline").remove();
+
         chart.selectAll("dot").data(events)
             .enter().append("circle")
             .attr("class", "event")
@@ -163,20 +166,30 @@ function init() {
             .on("click", function(d, index) {
                 gotoEvent(index);
             });
+            
+        var drawEventLine = d3.svg.line()
+            .x(function (d) { return xScale(getX(d)); })
+            .y(function (d) { return yScale(getY(d)); })
+            .interpolate('cardinal');
+
+        for (var i = 0; i < events.length; ++i) {
+            eventLine = [{date: events[i].date, open: 0},
+                         {date: events[i].date, open: 10}];
+            chart.append('svg:path')
+                .attr('d', drawEventLine(eventLine))
+                .attr('class', 'eventline');
+        }    
     }
     
     drawEvents();
 
     function onZoom() {
-        /*var tx = Math.min(0, d3.event.translate[0]);
-        var ty = Math.min(0, d3.event.translate[1]);*/
-        var tx = d3.event.translate[0];
-        var ty = d3.event.translate[1];
+        var tx = Math.min(0, d3.event.translate[0]);
+        var ty = Math.min(0, d3.event.translate[1]);
         zoom.translate([tx, ty]);
         svg.select(".x.axis").call(xAxis);
         svg.select(".y.axis").call(yAxis);
         svg.select(".line").attr("transform", "translate(" + [tx, ty] + ")scale(" + d3.event.scale + ")");
-        chart.selectAll("circle").remove();
         drawEvents();
     }
 
