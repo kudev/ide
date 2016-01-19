@@ -9,8 +9,26 @@
         <script type="text/javascript" src="data_full.js"></script>
         <script type="text/javascript" src="events.js"></script>
         <script type="text/javascript" src="final.js"></script>
+    <style>
+    div.popup {
+        position: fixed;
+        top: 20%;
+        left: 20%;
+        width: 60%;
+        height: 80%;
+    }
+    h1 {
+        text-shadow: 2px 2px #aaaaaa;
+    }
+    h2 {
+        text-shadow: 2px 2px #aaaaaa;
+    }
+    </style>
     </head>
     <body>
+    <div class="popup" onclick="this.remove()">
+        <h1>Made by: Rasmus Friis (gjv249), Erik Hajnal (bgh618)</h1> <h2>This visualisation is a graph of Forex entries at the start of the day between 2001 and 2015</h2><h2>Click to remove this message</h2>
+    </div>
         <div class="tooltip"></div>
         <svg id="chart" width="100%" height="100%"></svg>
     </body>
